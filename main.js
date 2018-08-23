@@ -2,24 +2,40 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const {app, BrowserWindow, Menu} = electron;
+const {app, BrowserWindow, Menu, screen} = electron;
 
-let mainWindow;
+let mainWindow, serve;
+
+const args = process.argv.slice(1);
+serve = args.some(val => val === '--serve');
 
 const shouldQuit = makeSingleInstance()
 if (shouldQuit) return app.quit()
 
 // Listen for app to be ready
 app.on('ready', function() {
+    const electronScreen = screen;
+    const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
     // Create new window
-    mainWindow = new BrowserWindow({});
+    mainWindow = new BrowserWindow({
+        width: size.width*0.7,
+        height: size.height*0.8,
+        center: true
+    });
     // Load main html into window
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file:',
-        slashes: true
-    }))
+    if (serve) {
+        require('electron-reload')(__dirname, {
+          electron: require(`${__dirname}/node_modules/electron`)
+        });
+        mainWindow.loadURL('http://localhost:4200');
+    } else {
+        mainWindow.loadURL(url.format({
+          pathname: path.join(__dirname, 'dist/trademark/index.html'),
+          protocol: 'file:',
+          slashes: true
+        }));
+    }
 
     // Quit app when closed
     mainWindow.on('closed', function() {
@@ -27,7 +43,7 @@ app.on('ready', function() {
     })
 
     // Build menu from template
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+    const mainMenu = Menu.buildFromTemplate([]);
 
     // Insert our menu
     Menu.setApplicationMenu(mainMenu);
