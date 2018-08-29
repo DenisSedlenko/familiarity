@@ -1,0 +1,21 @@
+<header class="vertical-header-container">
+    <nav>
+        <div class="container-header-items">
+            <div class="container-items">
+                <div class="logo">
+                    <div class="box-icon-logo">
+                        <div class="item-logo"></div>
+                        <div class="item-logo"></div>
+                        <div class="item-logo"></div>
+                    </div>
+                </div>
+                <div *ngFor="let item of items" class="item">
+                    <div class="menu-item" [ngClass]="{'active': true}">
+                        <svg class="icon icon-fly"><use xlink:href="#icon-fly"></use></svg>
+                        <div class="menu-text">{{item.name}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

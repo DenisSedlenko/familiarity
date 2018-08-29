@@ -1,94 +1,64 @@
-const electron = require('electron');
-const url = require('url');
-const path = require('path');
-
-const {app, BrowserWindow, Menu, screen} = electron;
-
-let mainWindow, serve;
-
-const args = process.argv.slice(1);
-serve = args.some(val => val === '--serve');
-
-const shouldQuit = makeSingleInstance()
-if (shouldQuit) return app.quit()
-
+var electron = require('electron');
+var url = require('url');
+var path = require('path');
+var app = electron.app, BrowserWindow = electron.BrowserWindow, Menu = electron.Menu;
+var mainWindow, serve;
+var args = process.argv.slice(1);
+serve = args.some(function (val) { return val === '--serve'; });
 // Listen for app to be ready
-app.on('ready', function() {
-    const electronScreen = screen;
-    const size = electronScreen.getPrimaryDisplay().workAreaSize;
-
+app.on('ready', function () {
+    var electronScreen = electron.screen;
+    var size = electronScreen.getPrimaryDisplay().workAreaSize;
     // Create new window
     mainWindow = new BrowserWindow({
-        width: size.width*0.7,
-        height: size.height*0.8,
+        width: size.width * 0.7,
+        height: size.height * 0.8,
         center: true
     });
+    // mainWindow.setMenuBarVisibility(false);
     // Load main html into window
     if (serve) {
         require('electron-reload')(__dirname, {
-          electron: require(`${__dirname}/node_modules/electron`)
+            electron: require(__dirname + "/node_modules/electron")
         });
         mainWindow.loadURL('http://localhost:4200');
-    } else {
+    }
+    else {
         mainWindow.loadURL(url.format({
-          pathname: path.join(__dirname, 'dist/trademark/index.html'),
-          protocol: 'file:',
-          slashes: true
+            pathname: path.join(__dirname, 'dist/index.html'),
+            protocol: 'file:',
+            slashes: true
         }));
     }
-
-    // Quit app when closed
-    mainWindow.on('closed', function() {
-        mainWindow = null
-    })
-
     // Build menu from template
-    const mainMenu = Menu.buildFromTemplate([]);
-
+    var mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
     // Insert our menu
     Menu.setApplicationMenu(mainMenu);
+    // Quit app when closed
+    mainWindow.on('closed', function () {
+        mainWindow = null;
+    });
 });
-
-app.on('window-all-closed', () => {
+app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
-      app.quit()
+        app.quit();
     }
-  });
-
-  app.on('activate', () => {
-    if (mainWindow === null) {
-      createWindow()
-    }
-  });
-
+});
 // Create menu template
-const mainMenuTemplate = [
+var mainMenuTemplate = [
     {
         label: 'File',
         submenu: [
             {
                 label: 'Quit',
-                accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
-                click() {
+                accelerator: process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+                click: function () {
                     app.quit();
                 }
             }
         ]
     }
 ];
-
-
-function makeSingleInstance () {
-    if (process.mas) return false
-  
-    return app.makeSingleInstance(() => {
-      if (mainWindow) {
-        if (mainWindow.isMinimized()) mainWindow.restore()
-        mainWindow.focus()
-      }
-    })
-}
-
 // Add developer tools if not in prod
 if (process.env.NODE_ENV !== 'production') {
     mainMenuTemplate.push({
@@ -97,7 +67,7 @@ if (process.env.NODE_ENV !== 'production') {
             {
                 label: 'Toggle DevTools',
                 accelerator: 'F12',
-                click(item, focusedWindow) {
+                click: function (item, focusedWindow) {
                     focusedWindow.toggleDevTools();
                 }
             },
@@ -107,3 +77,4 @@ if (process.env.NODE_ENV !== 'production') {
         ]
     });
 }
+//# sourceMappingURL=main.js.map

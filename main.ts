@@ -2,7 +2,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, Menu } = electron;
 
 let mainWindow, serve;
 
@@ -21,7 +21,7 @@ app.on('ready', function() {
         center: true
     });
 
-    mainWindow.setMenuBarVisibility(false);
+    // mainWindow.setMenuBarVisibility(false);
 
     // Load main html into window
     if (serve) {
@@ -37,6 +37,12 @@ app.on('ready', function() {
         }));
     }
 
+    // Build menu from template
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+
+    // Insert our menu
+    Menu.setApplicationMenu(mainMenu);
+
     // Quit app when closed
     mainWindow.on('closed', function() {
         mainWindow = null;
@@ -48,3 +54,38 @@ app.on('window-all-closed', () => {
       app.quit();
     }
   });
+
+  // Create menu template
+const mainMenuTemplate = [
+    {
+        label: 'File',
+        submenu: [
+            {
+                label: 'Quit',
+                accelerator: process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+                click() {
+                    app.quit();
+                }
+            }
+        ]
+    }
+];
+
+// Add developer tools if not in prod
+if (process.env.NODE_ENV !== 'production') {
+    mainMenuTemplate.push(<any>{
+        label: 'Developer Tools',
+        submenu: [
+            {
+                label: 'Toggle DevTools',
+                accelerator: 'F12',
+                click(item, focusedWindow) {
+                    focusedWindow.toggleDevTools();
+                }
+            },
+            {
+                role: 'reload'
+            }
+        ]
+    });
+}

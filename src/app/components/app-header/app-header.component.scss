@@ -1,0 +1,145 @@
+.vertical-header-container {
+    position: fixed;
+    width: 60px;
+    height: 100%;
+    background: #ebebeb;
+    z-index: 2;
+
+    .logo {
+      cursor: pointer;
+      position: relative;
+      display: block;
+      height: 70px;
+      background: #198ada;
+
+      .box-icon-logo {
+        position: absolute;
+        top: 25px;
+        left: 10px;
+        right: 10px;
+        height: 22px;
+        width: 40px;
+
+        .item-logo {
+          display: block;
+          height: 8px;
+          background-color: #fff;
+          float: right;
+
+          &:nth-child(1) {
+            width: 21px;
+          }
+
+          &:nth-child(2) {
+            width: 32px;
+          }
+
+          &:nth-child(3) {
+            width: 42px;
+          }
+        }
+      }
+    }
+
+    .menu-item {
+      cursor: pointer;
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 60px;
+      text-align: center;
+      line-height: 80px;
+      -moz-transition: all 0.3s;
+      -o-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+
+      .icon {
+        fill: #878789;
+        -moz-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+
+      .menu-text {
+        position: absolute;
+        top: 0;
+        left: -170px;
+        height: 70px;
+        width: 170px;
+        background-color: #198ada;
+        font-size: 18px;
+        text-align: center;
+        line-height: 18px;
+        color: transparent;
+        -moz-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+
+      &:hover {
+        background: rgba(0,0,0,.1);
+      }
+
+      &:hover .icon {
+        fill: #fff;
+      }
+
+      &:hover .menu-text {
+        color: #124268;
+        left: 70px;
+      }
+
+      &:focus {
+        color: #bcbcbc;
+      }
+
+      &.active {
+        position: absolute;
+        width: 2px;
+        background-color: #198ada;
+        height: 60px;
+        display: block;
+      }
+    }
+
+    .item.active .menu-item {
+      background: #198ada;
+
+      .icon {
+        fill: #fff;
+      }
+    }
+}
+
+.icon-info {
+  width: 24px;
+  height: 24px;
+}
+  
+.icon-fly {
+  width: 22px;
+  height: 21px;
+}
+  
+.icon-man {
+  width: 21px;
+  height: 22px;
+}
+  
+.icon-star {
+  width: 24px;
+  height: 23px;
+}
+  
+.icon-doc-menu {
+  width: 28px;
+  height: 19px;
+}
+  
+.icon-email-menu {
+  width: 27px;
+  height: 21px;
+}
