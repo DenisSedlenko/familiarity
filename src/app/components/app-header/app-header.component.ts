@@ -20,4 +20,23 @@ export class AppHeaderComponent {
     new ItemMenu('Результаты проверки', '' ),
     new ItemMenu('Отдельный поиск', '' )
   ];
+
+
+  onClick(event: MouseEvent) {
+    if (!(event.target as any).classList.includes('active')) {
+      const index = this.getFoundItemIndex((event.currentTarget as any).innerText);
+      if (index !== -1) {
+        this.deactivateItemMenu();
+        this.items[index].active = true;
+      }
+    }
+  }
+
+  getFoundItemIndex(itemName: string): number {
+    return this.items.findIndex(item => item.name === itemName);
+  }
+
+  deactivateItemMenu() {
+    this.items.forEach(item => { item.active = false; });
+  }
 }

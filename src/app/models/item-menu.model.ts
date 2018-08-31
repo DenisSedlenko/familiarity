@@ -7,6 +7,6 @@ export class ItemMenu {
     constructor (name: string, icon: string, active: boolean = false) {
         this.name = name;
         this.icon = icon;
-        this.active = this.active;
+        this.active = active;
     }
 }

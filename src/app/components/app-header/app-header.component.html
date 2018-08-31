@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div *ngFor="let item of items" class="item">
-                    <div class="menu-item" [ngClass]="{'active': true}">
+                    <div class="menu-item" [class.active]="item.active" (click)="onClick($event)">
                         <svg class="icon icon-fly"><use xlink:href="#icon-fly"></use></svg>
                         <div class="menu-text">{{item.name}}</div>
                     </div>

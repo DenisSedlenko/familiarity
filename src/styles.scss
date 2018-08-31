@@ -22,3 +22,6 @@ input:-moz-placeholder {
 input:-ms-input-placeholder {
     font-style: italic;
 }
+
+* { box-sizing: border-box; }
+*:before, *:after { box-sizing: border-box; }
