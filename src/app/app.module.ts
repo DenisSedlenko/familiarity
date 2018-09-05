@@ -8,6 +8,8 @@ import { MaterialModule } from './material.module';
 // Components
 import { AppComponent } from './components/app-component/app.component';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { AppLoaderComponent } from './components/app-loader/app-loader.component';
+
 
 // Services
 import { ElectronService } from './services/electron.service';
@@ -16,7 +18,8 @@ import { ElectronService } from './services/electron.service';
 @NgModule({
   declarations: [
     AppComponent,
-    AppHeaderComponent
+    AppHeaderComponent,
+    AppLoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -29,4 +32,5 @@ import { ElectronService } from './services/electron.service';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

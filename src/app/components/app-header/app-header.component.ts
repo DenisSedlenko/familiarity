@@ -23,7 +23,7 @@ export class AppHeaderComponent {
 
 
   onClick(event: MouseEvent) {
-    if (!(event.target as any).classList.includes('active')) {
+    if ((event.currentTarget as any).classList.value.indexOf('active') === -1 ) {
       const index = this.getFoundItemIndex((event.currentTarget as any).innerText);
       if (index !== -1) {
         this.deactivateItemMenu();

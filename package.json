@@ -37,6 +37,7 @@
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
     "ngx-electron": "^1.0.4",
+    "osmosis": "^1.1.8",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
   },

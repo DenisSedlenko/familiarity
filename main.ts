@@ -18,7 +18,11 @@ app.on('ready', function() {
     mainWindow = new BrowserWindow({
         width: size.width * 0.7,
         height: size.height * 0.8,
-        center: true
+        minHeight: 600,
+        minWidth: 500,
+        title: 'Trademark',
+        center: true,
+        icon: __dirname + '/Icon_512x512.ico'
     });
 
     // mainWindow.setMenuBarVisibility(false);
