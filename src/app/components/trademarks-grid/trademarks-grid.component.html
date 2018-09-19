@@ -1,0 +1,31 @@
+<div *ngIf="rowData && rowData.length;else nodata" class="trademark-container">
+    <div class="trademark-wrapper">
+      <ag-grid-angular #agGrid appHeightContainer class="ag-theme-material"
+            [gridOptions]="gridOptions"
+            [columnDefs]="columnDefs"
+            [rowData]="rowData"
+            [icons]="icons"
+            [enableColResize]="true"
+            [enableSorting]="true"
+            [enableFilter]="true"
+            [animateRows]="true"
+            [frameworkComponents]="frameworkComponents"
+            rowSelection="multiple"
+            rowHeight = 150
+            (gridReady)="onReady($event)">
+      </ag-grid-angular>
+    </div>
+</div>
+<ng-template #nodata>
+  <div appHeightContainer class="nodata-container">
+    <div class="nodata-wrapper">
+      <div class="nodata-block">
+        <div class="icon-empty"></div>
+        <div class="hint-block">
+          <p>Вы еще не добавили ни одного товарного знака</p>
+          <p>Загрузите товарные знаки с базы данных Роспатента, либо добавьте их вручную.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

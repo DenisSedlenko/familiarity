@@ -2,7 +2,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const { app, BrowserWindow, Menu } = electron;
+const { app, BrowserWindow, Menu, globalShortcut, remote } = electron;
 
 let mainWindow, serve;
 
@@ -19,13 +19,14 @@ app.on('ready', function() {
         width: size.width * 0.7,
         height: size.height * 0.8,
         minHeight: 600,
-        minWidth: 500,
+        minWidth: 600,
         title: 'Trademark',
         center: true,
+        frame: false,
         icon: __dirname + '/Icon_512x512.ico'
     });
 
-    // mainWindow.setMenuBarVisibility(false);
+    mainWindow.setMenuBarVisibility(false);
 
     // Load main html into window
     if (serve) {
@@ -42,10 +43,10 @@ app.on('ready', function() {
     }
 
     // Build menu from template
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+    // const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
 
     // Insert our menu
-    Menu.setApplicationMenu(mainMenu);
+    // Menu.setApplicationMenu(mainMenu);
 
     // Quit app when closed
     mainWindow.on('closed', function() {

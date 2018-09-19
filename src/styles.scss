@@ -1,9 +1,18 @@
+$icons-path: "~ag-grid-community/src/styles/icons/";
+
+.ag-body-viewport::-webkit-scrollbar { width: 0 !important; }
+
+@import '~ag-grid-community/src/styles/ag-grid.scss';
+@import '~ag-grid-community/src/styles/ag-theme-material.scss';
+@import './colors';
+
 body {
     font-family: 'Segoe UI', 'wf_segoe-ui_normal', helvetica, arial, sans-serif;
     overflow: hidden;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: $body-background-color;
 }
 
 body, p {

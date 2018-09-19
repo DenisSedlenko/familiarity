@@ -1,7 +1,7 @@
 var electron = require('electron');
 var url = require('url');
 var path = require('path');
-var app = electron.app, BrowserWindow = electron.BrowserWindow, Menu = electron.Menu;
+var app = electron.app, BrowserWindow = electron.BrowserWindow, Menu = electron.Menu, globalShortcut = electron.globalShortcut, remote = electron.remote;
 var mainWindow, serve;
 var args = process.argv.slice(1);
 serve = args.some(function (val) { return val === '--serve'; });
@@ -14,12 +14,13 @@ app.on('ready', function () {
         width: size.width * 0.7,
         height: size.height * 0.8,
         minHeight: 600,
-        minWidth: 500,
+        minWidth: 600,
         title: 'Trademark',
         center: true,
+        frame: false,
         icon: __dirname + '/Icon_512x512.ico'
     });
-    // mainWindow.setMenuBarVisibility(false);
+    mainWindow.setMenuBarVisibility(false);
     // Load main html into window
     if (serve) {
         require('electron-reload')(__dirname, {
@@ -35,12 +36,20 @@ app.on('ready', function () {
         }));
     }
     // Build menu from template
-    var mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+    // const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
     // Insert our menu
-    Menu.setApplicationMenu(mainMenu);
+    // Menu.setApplicationMenu(mainMenu);
     // Quit app when closed
     mainWindow.on('closed', function () {
         mainWindow = null;
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.which === 123) {
+            remote.getCurrentWindow().webContents.toggleDevTools();
+        }
+        else if (e.which === 116) {
+            location.reload();
+        }
     });
 });
 app.on('window-all-closed', function () {

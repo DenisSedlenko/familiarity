@@ -1,8 +1,10 @@
+@import '../../../colors';
+
 .vertical-header-container {
   position: fixed;
   width: 52px;
   height: 100%;
-  background: #ebebeb;
+  background: $header-background-color;
   z-index: 2;
 
   .logo {

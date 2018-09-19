@@ -1,4 +1,6 @@
 <div class="container">
+    <app-menu-bar></app-menu-bar>
     <app-header></app-header>
-    <app-loader></app-loader>
+    <app-trademarks-grid></app-trademarks-grid>
+    <app-loader *ngIf="isLoading"></app-loader>
 </div>
